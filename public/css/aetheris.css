@@ -1,0 +1,257 @@
+:root {
+    --bg: #05070f;
+    --fg: #e5e7eb;
+    --muted: #9ca3af;
+    --accent: #7c7cff;
+}
+
+body {
+    margin: 0;
+    font-family: 'Inter', system-ui;
+    background: var(--bg);
+    color: var(--fg);
+}
+
+/* NAV */
+.nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    padding: 20px 80px;
+    display: flex;
+    justify-content: space-between;
+    background: rgba(5,7,15,.6);
+    backdrop-filter: blur(20px);
+    z-index: 100;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.brand img {
+    width: 42px;
+}
+
+.nav-action a {
+    margin-left: 24px;
+    text-decoration: none;
+    color: var(--fg);
+}
+
+.nav-action .cta {
+    padding: 8px 18px;
+    border: 1px solid var(--accent);
+    border-radius: 999px;
+}
+
+/* HERO */
+.hero {
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-bg {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    transform: scale(1.1);
+    transition: transform 1s;
+}
+
+.hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom,rgba(5,7,15,.3),#05070f);
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    padding: 15%;
+    max-width: 900px;
+}
+
+.hero h1 {
+    font-size: 64px;
+    line-height: 1.1;
+    margin-bottom: 30px;
+}
+
+.hero p {
+    font-size: 18px;
+    color: var(--muted);
+    max-width: 600px;
+}
+
+.hero-btn a {
+    margin-right: 20px;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.primary {
+    color: var(--bg);
+    background: var(--accent);
+    padding: 14px 32px;
+    border-radius: 999px;
+}
+
+.secondary {
+    color: var(--accent);
+}
+
+/* MANIFESTO */
+.manifesto {
+    padding: 160px 20%;
+}
+
+.manifesto h2 {
+    font-size: 42px;
+    margin-bottom: 40px;
+}
+
+.manifesto p {
+    font-size: 18px;
+    line-height: 2;
+    color: var(--muted);
+    margin-bottom: 30px;
+}
+
+/* PRESTIGE */
+.prestige {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    padding: 120px 15%;
+    background: #070a18;
+}
+
+.stat h3 {
+    font-size: 48px;
+    color: var(--accent);
+}
+
+.stat span {
+    color: var(--muted);
+}
+
+/* CAMPUS */
+.campus {
+    padding: 140px 10%;
+}
+
+.campus-gallery {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 40px;
+}
+
+.campus-gallery img {
+    width: 100%;
+    border-radius: 24px;
+    transition: transform .6s;
+}
+
+.campus-gallery img:hover {
+    transform: scale(1.05);
+}
+
+footer {
+    padding: 60px;
+    text-align: center;
+    color: #6b7280;
+}
+/* LOGO HOVER */
+.brand img {
+    transition: transform .6s, filter .6s;
+}
+.brand:hover img {
+    transform: rotate(-8deg) scale(1.15);
+    filter: drop-shadow(0 0 20px var(--accent));
+}
+
+/* NAV LINK */
+.nav-action a {
+    position: relative;
+}
+.nav-action a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    width: 0;
+    height: 2px;
+    background: var(--accent);
+    transition: .4s;
+}
+.nav-action a:hover::after {
+    width: 100%;
+}
+
+/* BUTTON MAGNETIC */
+.primary, .cta {
+    transition: transform .3s, box-shadow .3s;
+}
+.primary:hover, .cta:hover {
+    transform: scale(1.08);
+    box-shadow: 0 0 40px rgba(124,124,255,.7);
+}
+
+/* HERO TEXT GLOW */
+.hero h1 {
+    text-shadow: 0 0 40px rgba(124,124,255,.15);
+}
+
+/* HIGHLIGHT STRIP */
+.highlight {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(240px,1fr));
+    gap: 40px;
+    padding: 120px 12%;
+    background: linear-gradient(180deg,#070a18,#05070f);
+}
+
+.highlight div {
+    padding: 40px;
+    border-radius: 22px;
+    background: rgba(255,255,255,.03);
+    border: 1px solid rgba(124,124,255,.15);
+    transition: .5s;
+}
+.highlight div:hover {
+    transform: translateY(-15px) scale(1.05);
+    box-shadow: 0 40px 80px rgba(0,0,0,.7);
+}
+
+/* ARTICLE */
+.article-extended {
+    padding: 140px 12%;
+}
+.article-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(260px,1fr));
+    gap: 50px;
+}
+.article-grid article {
+    padding: 30px;
+    border-left: 3px solid var(--accent);
+    transition: .5s;
+}
+.article-grid article:hover {
+    background: rgba(124,124,255,.05);
+    transform: translateX(10px);
+}
+
+/* CAMPUS IMAGE TILT */
+.campus-gallery img {
+    transform-style: preserve-3d;
+}
+.campus-gallery img:hover {
+    transform: perspective(800px) rotateX(6deg) rotateY(-6deg) scale(1.06);
+    box-shadow: 0 40px 100px rgba(124,124,255,.4);
+}

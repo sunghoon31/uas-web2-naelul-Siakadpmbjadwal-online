@@ -1,10 +1,10 @@
-{{-- File: resources/views/jadwal/index.blade.php --}}
 
-@extends('layouts.app')
 
-@section('title', 'Jadwal Kuliah')
 
-@section('content')
+
+<?php $__env->startSection('title', 'Jadwal Kuliah'); ?>
+
+<?php $__env->startSection('content'); ?>
 <div class="container-fluid py-4">
     <div class="card shadow-sm">
         <div class="card-header bg-white py-3">
@@ -41,13 +41,14 @@
                         <i class="bi bi-building"></i> Program Studi
                     </label>
                     <select class="form-select" id="filterProdi">
-                        @foreach($prodis as $prodi)
-                            <option value="{{ $prodi->id }}" 
-                                    data-fakultas-id="{{ $prodi->fakultas_id }}"
-                                    {{ $prodi->id == $selectedProdi ? 'selected' : '' }}>
-                                {{ $prodi->nama_prodi }} - {{ $prodi->fakultas->nama_fakultas }}
+                        <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php $__currentLoopData = $prodis; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $prodi): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                            <option value="<?php echo e($prodi->id); ?>" 
+                                    data-fakultas-id="<?php echo e($prodi->fakultas_id); ?>"
+                                    <?php echo e($prodi->id == $selectedProdi ? 'selected' : ''); ?>>
+                                <?php echo e($prodi->nama_prodi); ?> - <?php echo e($prodi->fakultas->nama_fakultas); ?>
+
                             </option>
-                        @endforeach
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
                     </select>
                 </div>
                 <div class="col-md-6">
@@ -55,11 +56,12 @@
                         <i class="bi bi-bookmark"></i> Semester
                     </label>
                     <select class="form-select" id="filterSemester">
-                        @foreach($semesters as $sem)
-                            <option value="{{ $sem }}" {{ $sem == $selectedSemester ? 'selected' : '' }}>
-                                Semester {{ $sem }}
+                        <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php $__currentLoopData = $semesters; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $sem): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                            <option value="<?php echo e($sem); ?>" <?php echo e($sem == $selectedSemester ? 'selected' : ''); ?>>
+                                Semester <?php echo e($sem); ?>
+
                             </option>
-                        @endforeach
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
                     </select>
                 </div>
             </div>
@@ -87,7 +89,7 @@
 </div>
 
 <!-- Include Form Modals -->
-@include('jadwal.form')
+<?php echo $__env->make('jadwal.form', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
 
 <!-- Modal Import -->
 <div class="modal fade" id="modalImport" tabindex="-1">
@@ -124,7 +126,7 @@
     </div>
 </div>
 
-@push('styles')
+<?php $__env->startPush('styles'); ?>
 <style>
     .jadwal-table {
         width: 100%;
@@ -365,9 +367,9 @@
         }
     }
 </style>
-@endpush
+<?php $__env->stopPush(); ?>
 
-@push('scripts')
+<?php $__env->startPush('scripts'); ?>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
 $(document).ready(function() {
@@ -401,7 +403,7 @@ $(document).ready(function() {
         `);
         
         $.ajax({
-            url: '{{ route("jadwal.index") }}',
+            url: '<?php echo e(route("jadwal.index")); ?>',
             method: 'GET',
             data: { 
                 prodi_id: prodiId, 
@@ -508,7 +510,7 @@ $(document).ready(function() {
     // Load Dosen
     function loadDosen() {
         $.ajax({
-            url: '{{ route("dosen.index") }}',
+            url: '<?php echo e(route("dosen.index")); ?>',
             method: 'GET',
             success: function(response) {
                 let options = '<option value="">Pilih Dosen</option>';
@@ -527,7 +529,7 @@ $(document).ready(function() {
     let allRuangans = [];
     function loadAllRuangan() {
         $.ajax({
-            url: '{{ route("ruangan.index") }}',
+            url: '<?php echo e(route("ruangan.index")); ?>',
             method: 'GET',
             success: function(response) {
                 allRuangans = response.data;
@@ -677,7 +679,7 @@ $(document).ready(function() {
         formDataArray.push({name: 'jam_selesai', value: jamSelesai});
         
         const id = $('#jadwal_id').val();
-        const url = id ? `/jadwal/${id}` : '{{ route("jadwal.store") }}';
+        const url = id ? `/jadwal/${id}` : '<?php echo e(route("jadwal.store")); ?>';
         const method = id ? 'PUT' : 'POST';
         
         // Show loading
@@ -1031,7 +1033,7 @@ $(document).ready(function() {
         });
         
         $.ajax({
-            url: '{{ route("jadwal.import") }}',
+            url: '<?php echo e(route("jadwal.import")); ?>',
             method: 'POST',
             data: formData,
             processData: false,
@@ -1066,6 +1068,7 @@ $(document).ready(function() {
     });
 });
 </script>
-@endpush
+<?php $__env->stopPush(); ?>
 
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.app', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH C:\Users\Lenovo\UAS-WEB2\resources\views/jadwal/index.blade.php ENDPATH**/ ?>
